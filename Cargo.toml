@@ -1,0 +1,13 @@
+[package]
+name = "cmh"
+version = "0.1.0"
+edition = "2021"
+description = "A CLI tool to keep track of your working hours"
+
+[dependencies]
+anyhow = "1.0.86"
+chrono = "0.4.38"
+clap = { version = "4.5.4", features = ["derive"] }
+colored = "2.1.0"
+dirs = "5.0.1"
+regex = "1.10.4"
