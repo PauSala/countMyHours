@@ -90,7 +90,7 @@ impl Config {
         Config {
             colors: Colors::default(),
             schedule: Schedule::default(),
-            list_icon: "-".to_string(),
+            list_icon: " ".to_string(),
             summary_icon: "⏀".to_string(),
         }
     }
