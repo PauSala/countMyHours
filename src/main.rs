@@ -23,7 +23,6 @@ const ABOUT_TEXT: &str = "
 |   - Add your total hours every day to keep track of your worktime.                   |
 |   - If you have worked more or less than 8 hours, adds or subtracts the difference.  |
 |   - You can also distribute your debt/surplus over given days.                       |
-|   - Assumes 40 hours workweek, 8 hours workday.                                      |
 |                                                                                      |
  --------------------------------------------------------------------------------------
 ";
