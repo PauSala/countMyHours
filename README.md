@@ -43,21 +43,23 @@ Options:
 ```
 
 ## Configuration
+A default configuration is provided.
+You can change the colors and the default daily hours in the configuration file.
 - Create a configuration file:  `~/.cmh.config.json`
 ## The configuration is a JSON object with the following properties:
 
 ```json
 {
   "colors": {
-    "primary": "#ECE2D0",
-    "secondary": "#B79CED",
-    "surplus": "#FB67EA",
-    "deficit": "#F06684",
-    "error": "#00FF00"
+    "primary": "#ECE2D0",  //default color
+    "secondary": "#B79CED",//main color
+    "surplus": "#FB67EA", //color for surplus
+    "deficit": "#F06684",   //color for deficit
+    "error": "#00FF00" //color for error messages
   },
   "schedule": {
     "daily_hours": "08:00",
-    "week_wd": 5
+    "week_wd": 5 //currently not used
   },
   "list_icon": "-",
   "summary_icon": "⏀"
