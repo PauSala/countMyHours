@@ -21,7 +21,7 @@
 -  -s, --summarize
           Resumes your current status
 
--  -d, --distribute [<number>]
+-  -d, --distribute [number]
           Distributes your current debt/surplus of worktime over given days, defaults to 5 days
 
 -  -u, --undo
