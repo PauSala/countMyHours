@@ -7,7 +7,6 @@ use config_loader::Config;
 use file_utils::{delete_last_two_lines, get_config_file_path};
 
 use crate::commands::handle_add_command;
-pub mod command;
 pub mod commands;
 pub mod config_loader;
 pub mod file_utils;

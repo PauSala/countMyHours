@@ -86,3 +86,16 @@ pub fn get_working_days(mut from: u32) -> i64 {
     }
     working_days
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn should_build_from_str() {
+        let result = Time::from_str("10:00").unwrap();
+        assert_eq!(result.minutes, 600);
+        let result = Time::from_str("-10:00").unwrap();
+        assert_eq!(result.minutes, -600);
+    }
+}
