@@ -7,6 +7,7 @@ use commands::{
 };
 use config_loader::Config;
 use file_utils::{delete_last_two_lines, get_config_file_path};
+use formatter::to_table;
 
 use crate::commands::handle_add_command;
 pub mod commands;
@@ -47,7 +48,7 @@ struct Cli {
     #[arg(short, long)]
     balance: bool,
 
-    /// Resumes your current status
+    /// Summarizes current status
     #[arg(short, long)]
     summarize: bool,
 
@@ -69,6 +70,7 @@ fn main() {
     let cli = Cli::parse();
     let config: Config = Config::from_file(get_config_file_path());
     let mut prettify = true;
+    let mut output: Vec<(&str, String)> = Vec::new();
 
     if cli.raw {
         prettify = false;
@@ -103,7 +105,7 @@ fn main() {
         if prettify {
             format_balance_command(balance, &config);
         } else {
-            println!("{}", balance);
+            output.push(("Balance", format!("{}", balance)));
         }
     }
 
@@ -112,7 +114,7 @@ fn main() {
         if prettify {
             format_distribute_command(counter, time, days, &config);
         } else {
-            println!("{}", time);
+            output.push(("Distribute", format!("{}", time)));
         }
     }
 
@@ -121,11 +123,13 @@ fn main() {
         if prettify {
             format_count_hours(hours, &config);
         } else {
-            println!("{}", hours);
+            output.push(("CountHours", format!("{}", hours)));
         }
     }
 
     if cli.summarize {
         handle_summarize_command(&config);
     }
+
+    to_table(&output);
 }
