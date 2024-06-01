@@ -51,11 +51,11 @@ You can change the colors and the default daily hours in the configuration file.
 ```json
 {
   "colors": {
-    "primary": "#ECE2D0",  //default color
-    "secondary": "#B79CED",//main color
-    "surplus": "#FB67EA", //color for surplus
-    "deficit": "#F06684",   //color for deficit
-    "error": "#00FF00" //color for error messages
+    "primary": "#ECE2D0",
+    "secondary": "#B79CED",
+    "surplus": "#FB67EA",
+    "deficit": "#F06684",
+    "error": "#00FF00"
   },
   "schedule": {
     "daily_hours": "08:00",
