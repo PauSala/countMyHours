@@ -1,0 +1,13 @@
+[tasks.build]
+description = "Build the project in release mode"
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.strip]
+description = "Strip the release binary"
+command = "strip"
+args = ["target/release/cmh"]
+
+[tasks.optimize]
+description = "Optimize the binary size"
+dependencies = ["build", "strip"]
