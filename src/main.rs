@@ -1,7 +1,9 @@
 use clap::Parser;
 use colored::*;
 use commands::{
-    handle_balance_command, handle_count_hours, handle_distribute_command, handle_summarize_command,
+    format_add_command, format_balance_command, format_count_hours, format_distribute_command,
+    handle_balance_command, handle_count_hours, handle_distribute_command,
+    handle_summarize_command,
 };
 use config_loader::Config;
 use file_utils::{delete_last_two_lines, get_config_file_path};
@@ -57,11 +59,20 @@ struct Cli {
     /// Undo last addition of time, cannot be used with other flags
     #[arg(short, long)]
     undo: bool,
+
+    /// Get raw results, not prettified
+    #[arg(short, long)]
+    raw: bool,
 }
 
 fn main() {
     let cli = Cli::parse();
     let config: Config = Config::from_file(get_config_file_path());
+    let mut prettify = true;
+
+    if cli.raw {
+        prettify = false;
+    }
 
     if cli.undo && cli.add.is_some()
         || cli.undo && cli.balance
@@ -82,18 +93,36 @@ fn main() {
 
     if let Some(add) = cli.add.as_deref() {
         handle_add_command(add, &config).unwrap();
+        if prettify {
+            format_add_command(add, &config);
+        }
     }
 
     if cli.balance {
-        handle_balance_command(&config).unwrap();
+        let balance = handle_balance_command().unwrap();
+        if prettify {
+            format_balance_command(balance, &config);
+        } else {
+            println!("{}", balance);
+        }
     }
 
     if let Some(distribute) = cli.distribute {
-        handle_distribute_command(distribute, &config).unwrap();
+        let (counter, time, days) = handle_distribute_command(distribute, &config).unwrap();
+        if prettify {
+            format_distribute_command(counter, time, days, &config);
+        } else {
+            println!("{}", time);
+        }
     }
 
     if let Some(value) = cli.count {
-        handle_count_hours(&value, &config).unwrap();
+        let hours = handle_count_hours(&value, &config).unwrap();
+        if prettify {
+            format_count_hours(hours, &config);
+        } else {
+            println!("{}", hours);
+        }
     }
 
     if cli.summarize {
