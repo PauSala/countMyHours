@@ -9,6 +9,7 @@
 ## Usage: cmh [OPTIONS]
 
 ### Options:
+```
 -  -a, --add <[hours]:[minutes]>
           Adds [hours]:[minutes] to your daily worktime
 
@@ -31,3 +32,4 @@
           Print help (see a summary with '-h')
 
 -  -V, --version
+```
