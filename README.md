@@ -32,7 +32,7 @@ Options:
 ## Configuration
 A default configuration is provided.
 You can change the colors and the default daily hours in the configuration file.
-- Create a configuration file:  `~/.cmh.config.json`
+- Create a configuration file in your home folder:  `~/.cmh.config.json`
 - The configuration is a JSON object with the following properties:
 
 ```json
