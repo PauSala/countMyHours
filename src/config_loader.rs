@@ -83,6 +83,8 @@ impl Schedule {
 pub struct Config {
     pub colors: Colors,
     pub schedule: Schedule,
+    pub list_icon: String,
+    pub summary_icon: String,
 }
 
 impl Config {
@@ -90,6 +92,8 @@ impl Config {
         Config {
             colors: Colors::default(),
             schedule: Schedule::default(),
+            list_icon: "-".to_string(),
+            summary_icon: "⏀".to_string(),
         }
     }
 }

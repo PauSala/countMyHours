@@ -1,9 +1,10 @@
 use clap::Parser;
 use colored::*;
-use commands::{count_hours, handle_balance_command, handle_distribute_command, resume};
+use commands::{
+    handle_balance_command, handle_count_hours, handle_distribute_command, handle_summarize_command,
+};
 use config_loader::Config;
 use file_utils::{delete_last_two_lines, get_config_file_path};
-use formatter::color_format;
 
 use crate::commands::handle_add_command;
 pub mod command;
@@ -48,7 +49,7 @@ struct Cli {
 
     /// Resumes your current status
     #[arg(short, long)]
-    resume: bool,
+    summarize: bool,
 
     /// Distributes your current debt/surplus of worktime
     /// over given days, defaults to 5 days
@@ -93,12 +94,11 @@ fn main() {
         handle_distribute_command(distribute, &config).unwrap();
     }
 
-    if cli.resume {
-        resume();
+    if let Some(value) = cli.count {
+        handle_count_hours(&value, &config).unwrap();
     }
 
-    if let Some(value) = cli.count {
-        let res = count_hours(&value);
-        println!("{}", color_format(vec![(&res, colored::Color::Red)]))
+    if cli.summarize {
+        handle_summarize_command(&config);
     }
 }
