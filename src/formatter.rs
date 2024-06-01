@@ -1,6 +1,8 @@
 use std::{cmp::max, fmt::Display};
 
 use colored::*;
+
+use crate::config_loader::Config;
 pub fn color_format<T: Display>(strs_and_colors: Vec<(T, Color)>) -> String {
     strs_and_colors
         .into_iter()
@@ -9,7 +11,7 @@ pub fn color_format<T: Display>(strs_and_colors: Vec<(T, Color)>) -> String {
         .join(" ")
 }
 
-pub fn to_table(data: &Vec<(&str, String)>) {
+pub fn to_table(data: &Vec<(&str, String)>, config: &Config) {
     if data.is_empty() {
         return;
     }
@@ -24,5 +26,9 @@ pub fn to_table(data: &Vec<(&str, String)>) {
         header.push_str(&format!("{:<width$} ", k, width = max));
         results.push_str(&format!("{:<width$} ", v, width = max));
     }
-    println!("{header}\n{results}");
+    println!(
+        "{}\n{}",
+        header.color(config.colors.primary.to_rgb().to_colored()),
+        results.color(config.colors.secondary.to_rgb().to_colored())
+    );
 }

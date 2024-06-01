@@ -131,5 +131,5 @@ fn main() {
         handle_summarize_command(&config);
     }
 
-    to_table(&output);
+    to_table(&output, &config);
 }
