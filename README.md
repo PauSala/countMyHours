@@ -59,7 +59,6 @@ You can change the colors and the default daily hours in the configuration file.
   },
   "schedule": {
     "daily_hours": "08:00",
-    "week_wd": 5 //currently not used
   },
   "list_icon": "-",
   "summary_icon": "⏀"

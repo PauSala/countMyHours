@@ -65,14 +65,12 @@ impl Colors {
 #[derive(Deserialize, Debug)]
 pub struct Schedule {
     pub daily_hours: String,
-    pub week_wd: u8,
 }
 
 impl Schedule {
     fn default() -> Self {
         Schedule {
             daily_hours: "08:00".to_string(),
-            week_wd: 5,
         }
     }
 }
