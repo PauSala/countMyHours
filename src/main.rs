@@ -1,14 +1,17 @@
 use clap::Parser;
 use colored::*;
-use commands::{count_hours, handle_distribute_command, handle_list_command, resume};
-use file_utils::delete_last_two_lines;
+use commands::{count_hours, handle_balance_command, handle_distribute_command, resume};
+use config_loader::Config;
+use file_utils::{delete_last_two_lines, get_config_file_path};
 use formatter::color_format;
 
 use crate::commands::handle_add_command;
+pub mod command;
 pub mod commands;
+pub mod config_loader;
 pub mod file_utils;
-pub mod time_utils;
 pub mod formatter;
+pub mod time_utils;
 
 const ABOUT_TEXT: &str = "
  ______________________________________________________________________________________
@@ -27,7 +30,7 @@ const ABOUT_TEXT: &str = "
 #[derive(Parser)]
 #[command(
     version,
-    about = "A CLI to manage your daily worktime", 
+    about = "A CLI to manage your daily worktime",
     long_about = ABOUT_TEXT,
     )]
 struct Cli {
@@ -59,6 +62,7 @@ struct Cli {
 
 fn main() {
     let cli = Cli::parse();
+    let config: Config = Config::from_file(get_config_file_path());
 
     if cli.undo && cli.add.is_some()
         || cli.undo && cli.balance
@@ -77,29 +81,16 @@ fn main() {
         return;
     }
 
-    if let Some(time) = cli.add.as_deref() {
-        handle_add_command(time).unwrap();
-        println!(
-            "{} {}",
-            "-".color(colored::Color::TrueColor {
-                r: 242,
-                g: 167,
-                b: 102
-            }),
-            format!("Added {} as your daily worktime", time).color(colored::Color::TrueColor {
-                r: 240,
-                g: 125,
-                b: 236
-            }),
-        );
+    if let Some(add) = cli.add.as_deref() {
+        handle_add_command(add, &config).unwrap();
     }
 
     if cli.balance {
-        handle_list_command().unwrap();
+        handle_balance_command(&config).unwrap();
     }
 
     if let Some(distribute) = cli.distribute {
-        handle_distribute_command(distribute).unwrap();
+        handle_distribute_command(distribute, &config).unwrap();
     }
 
     if cli.resume {
@@ -108,6 +99,6 @@ fn main() {
 
     if let Some(value) = cli.count {
         let res = count_hours(&value);
-        println!("{}", color_format(vec![(&res, colored::Color::Red)] ))
+        println!("{}", color_format(vec![(&res, colored::Color::Red)]))
     }
 }

@@ -6,7 +6,6 @@ use std::fmt;
 use std::ops::{Add, Sub};
 use std::str::FromStr;
 
-
 pub fn is_valid_time(time: &str) -> bool {
     let re = Regex::new(r"^-?(\d+):[0-5][0-9]$").unwrap();
     re.is_match(time)
@@ -87,4 +86,3 @@ pub fn get_working_days(mut from: u32) -> i64 {
     }
     working_days
 }
-

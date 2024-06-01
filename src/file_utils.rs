@@ -11,10 +11,16 @@ use std::str::FromStr;
 use crate::time_utils::Time;
 
 static DATA_FILE_NAME: &str = ".cmh.data";
+static CONFIG_FILE_NAME: &str = ".cmh.config.json";
 
 fn get_data_file_path() -> PathBuf {
     let home_dir = dirs::home_dir().expect("Home directory not found");
     home_dir.join(DATA_FILE_NAME)
+}
+
+pub fn get_config_file_path() -> PathBuf {
+    let home_dir = dirs::home_dir().expect("Home directory not found");
+    home_dir.join(CONFIG_FILE_NAME)
 }
 
 pub fn read_counter() -> Result<Time> {
