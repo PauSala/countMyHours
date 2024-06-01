@@ -39,7 +39,7 @@ pub fn handle_balance_command(config: &Config) -> Result<()> {
                 .list_icon
                 .color(config.colors.primary.to_rgb().to_colored()),
             "You have worked exactly the amount you should!"
-                .color(config.colors.success.to_rgb().to_colored())
+                .color(config.colors.primary.to_rgb().to_colored())
         );
         return Ok(());
     }
@@ -152,7 +152,7 @@ pub fn handle_count_hours(mode: &str, config: &Config) -> Result<()> {
                 config.colors.primary.to_rgb().to_colored()
             ),
             (
-                format!("Hours count: {}", &res),
+                format!("Working hours count: {}", &res),
                 config.colors.secondary.to_rgb().to_colored()
             )
         ])

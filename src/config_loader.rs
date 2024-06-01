@@ -48,18 +48,16 @@ pub struct Colors {
     pub surplus: HexColor,
     pub deficit: HexColor,
     pub error: HexColor,
-    pub success: HexColor,
 }
 
 impl Colors {
     fn default() -> Self {
         Colors {
-            primary: HexColor("#000000".to_string()),
-            secondary: HexColor("#000000".to_string()),
-            surplus: HexColor("#000000".to_string()),
-            deficit: HexColor("#000000".to_string()),
-            error: HexColor("#000000".to_string()),
-            success: HexColor("#000000".to_string()),
+            primary: HexColor("#F8E16C".to_string()),
+            secondary: HexColor("#F07DEC".to_string()),
+            surplus: HexColor("#6DF3A2".to_string()),
+            deficit: HexColor("#F06684".to_string()),
+            error: HexColor("#00FF00".to_string()),
         }
     }
 }
