@@ -78,7 +78,7 @@ pub fn handle_distribute_command(
     config: &Config,
 ) -> Result<(Time, Time, i32)> {
     if number_of_days == 0 {
-        bail!("You could work endlessly and still find yourself at the beginning, even as the universe stretches into eternity (can't divide by zero)")
+        bail!("Can't divide by zero")
     }
     let counter = read_counter()?;
     if counter.minutes == 0 {
