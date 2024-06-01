@@ -77,7 +77,7 @@ pub fn handle_distribute_command(number_of_days: i32, config: &Config) -> Result
                 .list_icon
                 .color(config.colors.primary.to_rgb().to_colored()),
             "Nothing to distribute, your balance is 0"
-                .color(config.colors.secondary.to_rgb().to_colored())
+                .color(config.colors.primary.to_rgb().to_colored())
         );
         return Ok(());
     }
