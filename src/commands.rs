@@ -3,7 +3,7 @@ use crate::{
     file_utils::{append_to_file, read_counter},
     time_utils::{get_working_days, Time},
 };
-use anyhow::{Ok, Result};
+use anyhow::{bail, Ok, Result};
 use chrono::Datelike;
 use chrono::{DateTime, Local};
 use colored::*;
@@ -77,6 +77,9 @@ pub fn handle_distribute_command(
     number_of_days: i32,
     config: &Config,
 ) -> Result<(Time, Time, i32)> {
+    if number_of_days == 0 {
+        bail!("You could work endlessly and still find yourself at the beginning, even as the universe stretches into eternity (can't divide by zero)")
+    }
     let counter = read_counter()?;
     if counter.minutes == 0 {
         return Ok((counter, Time::from_str("00:00")?, 0));

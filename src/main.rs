@@ -1,3 +1,4 @@
+use anyhow::Error;
 use clap::Parser;
 use colored::*;
 use commands::{
@@ -83,6 +84,9 @@ fn main() {
     if cli.undo && cli.add.is_some()
         || cli.undo && cli.balance
         || cli.undo && cli.distribute.is_some()
+        || cli.undo && cli.init_balance
+        || cli.undo && cli.summarize
+        || cli.undo && cli.count.is_some()
     {
         println!(
             "{} {}",
@@ -102,36 +106,56 @@ fn main() {
     }
 
     if let Some(add) = cli.add.as_deref() {
-        handle_add_command(add, &config).unwrap();
-        if prettify {
-            format_add_command(add, &config);
+        let e = handle_add_command(add, &config);
+        match e {
+            Ok(_) => {
+                if prettify {
+                    format_add_command(add, &config);
+                }
+            }
+            Err(e) => format_error(e, &config),
         }
     }
 
     if cli.balance {
-        let balance = handle_balance_command().unwrap();
-        if prettify {
-            format_balance_command(balance, &config);
-        } else {
-            output.push(("Balance", format!("{}", balance)));
+        let balance = handle_balance_command();
+        match balance {
+            Err(e) => format_error(e, &config),
+            Ok(balance) => {
+                if prettify {
+                    format_balance_command(balance, &config);
+                } else {
+                    output.push(("Balance", format!("{}", balance)));
+                }
+            }
         }
     }
 
     if let Some(distribute) = cli.distribute {
-        let (counter, time, days) = handle_distribute_command(distribute, &config).unwrap();
-        if prettify {
-            format_distribute_command(counter, time, days, &config);
-        } else {
-            output.push(("Distribute", format!("{}", time)));
+        let e = handle_distribute_command(distribute, &config);
+        match e {
+            Err(e) => format_error(e, &config),
+            Ok((counter, time, days)) => {
+                if prettify {
+                    format_distribute_command(counter, time, days, &config);
+                } else {
+                    output.push(("Distribute", format!("{}", time)));
+                }
+            }
         }
     }
 
     if let Some(value) = cli.count {
-        let hours = handle_count_hours(&value, &config).unwrap();
-        if prettify {
-            format_count_hours(hours, &config);
-        } else {
-            output.push(("CountHours", format!("{}", hours)));
+        let hours = handle_count_hours(&value, &config);
+        match hours {
+            Err(e) => format_error(e, &config),
+            Ok(hours) => {
+                if prettify {
+                    format_count_hours(hours, &config);
+                } else {
+                    output.push(("CountHours", format!("{}", hours)));
+                }
+            }
         }
     }
 
@@ -140,4 +164,12 @@ fn main() {
     }
 
     to_table(&output, &config);
+}
+
+pub fn format_error(e: Error, config: &Config) {
+    println!(
+        "{} {}",
+        "error:".color(config.colors.error.to_rgb().to_colored()),
+        format!("{}", e).white()
+    );
 }
