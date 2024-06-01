@@ -6,7 +6,7 @@ use commands::{
     handle_summarize_command,
 };
 use config_loader::Config;
-use file_utils::{delete_last_two_lines, get_config_file_path};
+use file_utils::{delete_last_two_lines, get_config_file_path, init_balance};
 use formatter::to_table;
 
 use crate::commands::handle_add_command;
@@ -61,6 +61,10 @@ struct Cli {
     #[arg(short, long)]
     undo: bool,
 
+    /// Sets current balance to zero
+    #[arg(short, long)]
+    init_balance: bool,
+
     /// Get raw results, not prettified
     #[arg(short, long)]
     raw: bool,
@@ -91,6 +95,10 @@ fn main() {
     if cli.undo {
         delete_last_two_lines().unwrap();
         return;
+    }
+
+    if cli.init_balance {
+        init_balance().unwrap();
     }
 
     if let Some(add) = cli.add.as_deref() {

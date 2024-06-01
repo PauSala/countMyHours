@@ -46,6 +46,12 @@ pub fn read_counter() -> Result<Time> {
     }
 }
 
+pub fn init_balance() -> Result<()> {
+    append_to_file("Init ----------------")?;
+    append_to_file("00:00")?;
+    Ok(())
+}
+
 pub fn append_to_file(content: &str) -> Result<()> {
     let path = get_data_file_path();
     let mut file = OpenOptions::new().write(true).append(true).open(path)?;

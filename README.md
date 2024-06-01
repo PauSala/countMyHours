@@ -17,29 +17,16 @@
 Usage: cmh [OPTIONS]
 
 Options:
- -a, --add <[hours]:[minutes]>
-         Adds [hours]:[minutes] to your daily worktime
-
- -c, --count <[t|p]>
-         counts the total(t) or pending(p) hours for this month
-
- -b, --balance
-         Lists your current debt/surplus of worktime
-
- -s, --summarize
-         Resumes your current status
-
- -d, --distribute [<number>]
-         Distributes your current debt/surplus of worktime over given days, defaults to 5 days
-
- -u, --undo
-         Undo last addition of time, cannot be used with other flags
-
- -h, --help
-         Print help (see a summary with '-h')
-
- -V, --version
-         Print version
+-a, --add <[hours]:[minutes]>  Adds [hours]:[minutes] to your daily worktime
+-c, --count <[t|p]>            counts the total(t) or pending(p) hours for this month
+-b, --balance                  Lists your current debt/surplus of worktime
+-s, --summarize                Summarizes current status
+-d, --distribute [<number>]    Distributes your current debt/surplus of worktime over given days, defaults to 5 days
+-u, --undo                     Undo last addition of time, cannot be used with other flags
+-i, --init-balance             Sets current balance to zero
+-r, --raw                      Get raw results, not prettified
+-h, --help                     Print help (see more with '--help')
+-V, --version                  Print version
 ```
 
 ## Configuration
