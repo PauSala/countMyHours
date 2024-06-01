@@ -70,7 +70,7 @@ fn main() {
     {
         println!(
             "{} {}",
-            "error:".red(),
+            "error:".color(config.colors.error.to_rgb().to_colored()),
             "Undo is not allowed with other flags".white()
         );
         return;

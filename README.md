@@ -1,7 +1,7 @@
 
 # Count My Hours
 
-```
+```bash
 ______________________________________________________________________________________
 |                                                                                      |
 |   Count My Hours! (cmh)                                                              |
@@ -40,4 +40,26 @@ Options:
 
  -V, --version
          Print version
+```
+
+## Configuration
+- Create a configuration file:  `~/.cmh.config.json`
+## The configuration is a JSON object with the following properties:
+
+```json
+{
+  "colors": {
+    "primary": "#ECE2D0",
+    "secondary": "#B79CED",
+    "surplus": "#FB67EA",
+    "deficit": "#F06684",
+    "error": "#00FF00"
+  },
+  "schedule": {
+    "daily_hours": "08:00",
+    "week_wd": 5
+  },
+  "list_icon": "-",
+  "summary_icon": "⏀"
+}
 ```
