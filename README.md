@@ -11,7 +11,7 @@
 |   - If you have worked more or less than 8 hours, adds or subtracts the difference.  |
 |   - You can also distribute your debt/surplus over given days.                       |
 |                                                                                      |
---------------------------------------------------------------------------------------
+ -------------------------------------------------------------------------------------
 
 
 Usage: cmh [OPTIONS]
